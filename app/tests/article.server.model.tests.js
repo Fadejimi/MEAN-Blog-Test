@@ -1,8 +1,8 @@
 var app = require('../../server.js'),
     should = require('should'),
     mongoose = require('mongoose'),
-    User = require('User'),
-    Article = require('Article');
+    User = mongoose.model('User'),
+    Article = mongoose.model('Article');
 
 var user, article;
 
@@ -44,10 +44,8 @@ describe('Article Model Unit Tests', function(){
     });
 
     afterEach(function(done) {
-        Article.remove(function() {
-            User.remove(function() {
-                done();
-            });
-        });
+        Article.remove().exec();
+        User.remove().exec();
+        done();
     });
 });
